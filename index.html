@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Antony Sifuna - Full-Stack Developer specializing in AI and Security." />
+    <title>Antony Sifuna | AI & Security Engineer</title>
+    <style>
+      /* Inline critical CSS so content shows immediately */
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body { background: #111827; color: #fff; font-family: system-ui, -apple-system, sans-serif; min-height: 100vh; }
+      #root { min-height: 100vh; }
+      .__loading {
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+        min-height: 100vh; text-align: center; padding: 2rem;
+      }
+      .__loading h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem; }
+      .__loading h1 span { background: linear-gradient(135deg, #818cf8, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+      .__loading p { color: #94a3b8; font-size: 1.1rem; }
+      .__loading .bar { width: 200px; height: 4px; background: #1e293b; border-radius: 2px; margin-top: 2rem; overflow: hidden; }
+      .__loading .bar-inner { height: 100%; background: linear-gradient(90deg, #818cf8, #a78bfa); border-radius: 2px; animation: load 2s ease-in-out infinite; }
+      @keyframes load { 0% { width: 0%; } 50% { width: 100%; } 100% { width: 0%; } }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <div class="__loading">
+        <h1>Antony <span>Sifuna</span></h1>
+        <p>Loading portfolio...</p>
+        <div class="bar"><div class="bar-inner"></div></div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
