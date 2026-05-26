@@ -1,7 +1,9 @@
 import { useState, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { FiMail, FiMessageSquare, FiSend, FiUser } from 'react-icons/fi';
+import { FiMail, FiMessageSquare, FiSend, FiUser, FiCheck, FiAlertCircle } from 'react-icons/fi';
 import { FaGithub, FaLinkedin, FaWhatsapp, FaFacebook, FaTiktok, FaInstagram, FaTwitter } from 'react-icons/fa';
+
+const FORMSPREE_URL = 'https://formspree.io/f/xovkojdz';
 
 const Contact = () => {
   const ref = useRef(null);
@@ -12,13 +14,29 @@ const Contact = () => {
 
   const y = useTransform(scrollYProgress, [0, 1], [50, -50]);
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState('idle'); // idle | sending | success | error
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSent(true);
-    setTimeout(() => setSent(false), 3000);
-    setFormData({ name: '', email: '', message: '' });
+    setStatus('sending');
+    try {
+      const res = await fetch(FORMSPREE_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+      if (res.ok) {
+        setStatus('success');
+        setFormData({ name: '', email: '', message: '' });
+        setTimeout(() => setStatus('idle'), 4000);
+      } else {
+        setStatus('error');
+        setTimeout(() => setStatus('idle'), 4000);
+      }
+    } catch {
+      setStatus('error');
+      setTimeout(() => setStatus('idle'), 4000);
+    }
   };
 
   const socials = [
@@ -110,15 +128,15 @@ const Contact = () => {
               </div>
               <motion.button
                 type="submit"
-                className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-cyber-blue to-cyber-purple text-white font-medium text-sm glow-button border-0 cursor-pointer"
+                disabled={status === 'sending'}
+                className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-cyber-blue to-cyber-purple text-white font-medium text-sm glow-button border-0 cursor-pointer disabled:opacity-60"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                {sent ? (
-                  <>Message Sent! <FiSend className="animate-pulse" /></>
-                ) : (
-                  <>Send Message <FiSend /></>
-                )}
+                {status === 'sending' && <>Sending...</>}
+                {status === 'success' && <><FiCheck /> Message Sent!</>}
+                {status === 'error' && <><FiAlertCircle /> Failed to Send</>}
+                {status === 'idle' && <>Send Message <FiSend /></>}
               </motion.button>
             </form>
           </motion.div>

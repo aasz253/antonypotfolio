@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { FiArrowRight, FiDownload, FiMail, FiEye } from 'react-icons/fi';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import cvFile from '../Sifuna_Codex_CV.pdf';
 
 const Hero = () => {
   const containerRef = useRef(null);
@@ -82,14 +83,15 @@ const Hero = () => {
             Hire Me
           </button>
 
-          <button
-            onClick={() => scrollTo('contact')}
+          <a
+            href={cvFile}
+            download="Sifuna_Codex_CV.pdf"
             className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-medium text-sm sm:text-base transition-all cursor-pointer border-0"
-            style={{ background: 'rgba(255,255,255,0.05)', color: '#cbd5e1', border: '1px solid rgba(255,255,255,0.06)' }}
+            style={{ background: 'rgba(255,255,255,0.05)', color: '#cbd5e1', border: '1px solid rgba(255,255,255,0.06)', textDecoration: 'none' }}
           >
             <FiDownload size={16} />
             Download CV
-          </button>
+          </a>
 
           <button
             onClick={() => scrollTo('contact')}
