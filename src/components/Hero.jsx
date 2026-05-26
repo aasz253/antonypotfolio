@@ -18,6 +18,15 @@ const Hero = () => {
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const downloadCV = () => {
+    const link = document.createElement('a');
+    link.href = cvFile;
+    link.download = 'Sifuna_Codex_CV.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <section
       id="hero"
@@ -83,15 +92,14 @@ const Hero = () => {
             Hire Me
           </button>
 
-          <a
-            href={cvFile}
-            download="Sifuna_Codex_CV.pdf"
+          <button
+            onClick={downloadCV}
             className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-medium text-sm sm:text-base transition-all cursor-pointer border-0"
-            style={{ background: 'rgba(255,255,255,0.05)', color: '#cbd5e1', border: '1px solid rgba(255,255,255,0.06)', textDecoration: 'none' }}
+            style={{ background: 'rgba(255,255,255,0.05)', color: '#cbd5e1', border: '1px solid rgba(255,255,255,0.06)' }}
           >
             <FiDownload size={16} />
             Download CV
-          </a>
+          </button>
 
           <button
             onClick={() => scrollTo('contact')}
