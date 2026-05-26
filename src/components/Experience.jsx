@@ -1,35 +1,22 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { FiBriefcase, FiBook, FiTarget, FiTrendingUp, FiAward, FiStar } from 'react-icons/fi';
+import { FiBook, FiTarget, FiTrendingUp, FiAward, FiShield } from 'react-icons/fi';
+import profilePic from '../WhatsApp Image 2025-10-11 at 12.18.18_8bdde7b0.jpg';
 
 const timeline = [
   {
-    year: 'Present',
-    title: 'Full-Stack Developer (AI & Security)',
-    desc: 'Building advanced AI-powered applications with enterprise-grade security. Developing intelligent systems that combine modern full-stack technologies with AI integration and cybersecurity best practices.',
-    icon: FiBriefcase,
+    year: '2024 - Present',
+    title: 'Higher Education in Software Engineering',
+    desc: 'Currently pursuing advanced studies in software engineering with a focus on AI integration, cybersecurity, and full-stack development. Building real-world systems and expanding expertise across modern technologies.',
+    icon: FiBook,
     color: '#6366f1',
   },
   {
-    year: '2024',
-    title: 'Industrial Training & Certification',
-    desc: 'Completed intensive industrial training in software engineering, AI development, and cybersecurity. Earned certifications in modern development frameworks and security protocols.',
-    icon: FiBook,
-    color: '#00d4ff',
-  },
-  {
     year: '2023',
-    title: 'Portfolio Development & Open Source',
-    desc: 'Developed comprehensive portfolio of projects spanning AI, security, and full-stack development. Contributed to open-source projects and built real-world applications.',
+    title: 'KCSE Certification',
+    desc: 'Completed the Kenya Certificate of Secondary Education (KCSE), laying a strong academic foundation in sciences and mathematics that sparked a deep passion for technology and software engineering.',
     icon: FiAward,
     color: '#10b981',
-  },
-  {
-    year: '2022',
-    title: 'Software Engineering Journey Begins',
-    desc: 'Started the professional journey in software engineering. Learned modern web technologies, mobile development, and database systems while building practical applications.',
-    icon: FiStar,
-    color: '#ec4899',
   },
 ];
 
@@ -53,8 +40,6 @@ const goals = [
     color: '#00d4ff',
   },
 ];
-
-import { FiShield } from 'react-icons/fi';
 
 const Experience = () => {
   const ref = useRef(null);
@@ -99,18 +84,16 @@ const Experience = () => {
         </motion.div>
 
         {/* Timeline */}
-        <div className="max-w-3xl mx-auto mb-20">
+        <div className="max-w-3xl mx-auto mb-20 px-2 sm:px-0">
           <div className="relative">
             {/* Timeline line */}
-            <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-cyber-blue via-cyber-purple to-cyber-pink opacity-30 md:-translate-x-px" />
+            <div className="absolute left-6 top-0 bottom-0 w-px bg-gradient-to-b from-cyber-blue via-cyber-purple to-cyber-pink opacity-30" />
 
             {timeline.map((item, i) => (
               <motion.div
                 key={i}
-                className={`relative flex items-start gap-6 mb-12 md:mb-16 ${
-                  i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-                }`}
-                initial={{ opacity: 0, x: i % 2 === 0 ? -30 : 30 }}
+                className="relative flex items-start gap-4 sm:gap-6 mb-10 sm:mb-12"
+                initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
@@ -118,39 +101,55 @@ const Experience = () => {
                 {/* Timeline dot */}
                 <div className="relative z-10 flex-shrink-0 mt-1">
                   <div
-                    className="w-12 h-12 rounded-xl flex items-center justify-center"
+                    className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center"
                     style={{
                       background: `${item.color}20`,
                       border: `1px solid ${item.color}40`,
                       boxShadow: `0 0 20px ${item.color}20`,
                     }}
                   >
-                    <item.icon style={{ color: item.color }} size={18} />
+                    <item.icon style={{ color: item.color }} size={16} />
                   </div>
                 </div>
 
                 {/* Content */}
-                <div className={`flex-1 ${i % 2 === 0 ? 'md:text-right md:mr-8' : 'md:text-left md:ml-8'}`}>
+                <div className="flex-1 min-w-0">
                   <div
                     className="text-xs font-mono mb-1"
                     style={{ color: item.color }}
                   >
                     {item.year}
                   </div>
-                  <h3 className="text-lg font-display font-semibold text-white mb-2">
+                  <h3 className="text-base sm:text-lg font-display font-semibold text-white mb-1.5 break-words">
                     {item.title}
                   </h3>
-                  <p className="text-sm text-gray-400 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-gray-400 leading-relaxed break-words">
                     {item.desc}
                   </p>
                 </div>
-
-                {/* Spacer for alternating layout */}
-                <div className="hidden md:block flex-1" />
               </motion.div>
             ))}
           </div>
         </div>
+
+        {/* Photo */}
+        <motion.div
+          className="max-w-lg mx-auto mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <div className="relative group">
+            <div className="absolute -inset-1 bg-gradient-to-r from-cyber-blue via-cyber-purple to-cyber-pink rounded-2xl opacity-30 group-hover:opacity-60 blur transition-all duration-500" />
+            <div className="relative overflow-hidden rounded-2xl border border-white/10">
+              <img
+                src={profilePic}
+                alt="Antony Sifuna"
+                className="w-full h-auto object-cover"
+              />
+            </div>
+          </div>
+        </motion.div>
 
         {/* Goals */}
         <motion.div
